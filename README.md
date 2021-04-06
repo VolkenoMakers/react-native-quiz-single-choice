@@ -85,25 +85,25 @@ export default QuizSingleChoiceApp;
 
 ## Properties
 
-| Property name             | Type       | Description                                                                                                |
-| ------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
-| **containerStyle**| _Object_ | Custom style for the screen container|
-| **questionTitleStyle**| _Object_ | custom style for the title of the question|
-| **responseStyle**| _Object_ | custom style for the container of each response|
-| **responseTextStyle**| _Object_ | custom style for the text of each response|
-| **selectedResponseStyle**| _Object_ | custom style for the container of the selected response|
-| **selectedResponseTextStyle**| _Object_ | custom style for the text of selected response|
-| **responseRequired**| _Boolean_ | make the answer mandatory if true. default to false|
-| **nextButtonText**| _String_ | the text of the next button|
-| **nextButtonStyle**| _Object_ | Custom for the next button|
-| **nextButtonTextStyle**| _Object_ | Custom for the title of the next button|
-| **prevButtonText**| _String_ | the text of the prev button|
-| **prevButtonStyle**| _Object_ | Custom for the prev button|
-| **prevButtonTextStyle**| _Object_ | Custom for the title of the prev button|
-| **endButtonText**| _String_ | the text of the end button|
-| **endButtonStyle**| _Object_ | Custom for the end button|
-| **endButtonTextStyle**| _Object_ | Custom for the title of the end button|
-| **buttonsContainerStyle**| _Object_ | Custom for the container of the next and prev buttons|
-| **onEnd**| _Function_ | Function to handle the end of the quiz|
+| Property name                 | Type       | Description                                                 |
+| ----------------------------- | ---------- | ----------------------------------------------------------- |
+| **containerStyle**            | _Object_   | Custom style for the screen container                       |
+| **questionTitleStyle**        | _Object_   | custom style for the title of the question                  |
+| **responseStyle**             | _Object_   | custom style for the container of each response             |
+| **responseTextStyle**         | _Object_   | custom style for the text of each response                  |
+| **selectedResponseStyle**     | _Object_   | custom style for the container of the selected response     |
+| **selectedResponseTextStyle** | _Object_   | custom style for the text of selected response              |
+| **responseRequired**          | _Boolean_  | make the answer mandatory if true. default to false         |
+| **nextButtonText**            | _String_   | the text of the next button                                 |
+| **nextButtonStyle**           | _Object_   | Custom style for the next button                            |
+| **nextButtonTextStyle**       | _Object_   | Custom style for the title of the next button               |
+| **prevButtonText**            | _String_   | the text of the prev button                                 |
+| **prevButtonStyle**           | _Object_   | Custom style for the prev button                            |
+| **prevButtonTextStyle**       | _Object_   | Custom style for the title of the prev button               |
+| **endButtonText**             | _String_   | the text of the end button                                  |
+| **endButtonStyle**            | _Object_   | Custom style for the end button                             |
+| **endButtonTextStyle**        | _Object_   | Custom style for the title of the end button                |
+| **buttonsContainerStyle**     | _Object_   | Custom style for the container of the next and prev buttons |
+| **onEnd**                     | _Function_ | Function to handle the end of the quiz                      |
 
 **ISC Licensed**
