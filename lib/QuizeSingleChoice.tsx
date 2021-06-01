@@ -1,8 +1,29 @@
 import React from "react";
-import { View, Text, Dimensions, Animated } from "react-native";
+import { TextStyle } from "react-native";
+import { View, Text, Dimensions, Animated, ViewStyle } from "react-native";
 import { AppButton, OppButton } from "./Buttons";
 const { width } = Dimensions.get("window");
-
+type QuizSingleChoiceProps = {
+  containerStyle: ViewStyle;
+  questionTitleStyle: TextStyle;
+  responseStyle: ViewStyle;
+  responseTextStyle: TextStyle;
+  selectedResponseStyle: ViewStyle;
+  selectedResponseTextStyle;
+  nextButtonText: string;
+  nextButtonStyle: ViewStyle;
+  nextButtonTextStyle: TextStyle;
+  endButtonText: string;
+  endButtonStyle: ViewStyle;
+  endButtonTextStyle: TextStyle;
+  prevButtonText: string;
+  prevButtonStyle: ViewStyle;
+  prevButtonTextStyle: TextStyle;
+  buttonsContainerStyle: ViewStyle;
+  responseRequired: boolean;
+  onEnd: (results: any) => any;
+  data: Array<any>;
+};
 const QuizSingleChoice = ({
   containerStyle,
   questionTitleStyle,
@@ -23,7 +44,7 @@ const QuizSingleChoice = ({
   responseRequired,
   onEnd,
   data,
-}) => {
+}: QuizSingleChoiceProps) => {
   const originalData = data;
   const [questions, setQuestions] = React.useState([
     ...originalData.sort((_) => Math.random() - 0.5),
@@ -32,13 +53,16 @@ const QuizSingleChoice = ({
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const animation = React.useRef(new Animated.Value(0)).current;
 
-  const onAnswer = React.useCallback((_, response) => {
-    const newQuestions = [...questions];
-    const activeQuestion = { ...newQuestions[currentIndex] };
-    activeQuestion.response = response;
-    newQuestions[currentIndex] = activeQuestion;
-    setQuestions(newQuestions);
-  });
+  const onAnswer = React.useCallback(
+    (_, response) => {
+      const newQuestions = [...questions];
+      const activeQuestion = { ...newQuestions[currentIndex] };
+      activeQuestion.response = response;
+      newQuestions[currentIndex] = activeQuestion;
+      setQuestions(newQuestions);
+    },
+    [questions, currentIndex]
+  );
   const onNext = React.useCallback(() => {
     if (currentIndex === questions.length - 1) {
       handleEnd(questions);
@@ -127,10 +151,11 @@ const QuizSingleChoice = ({
             onPrev();
           }}
           disabled={isFirst}
-          containerStyle={[
-            { width: "40%", backgroundColor: "#F00" },
-            prevButtonStyle,
-          ]}
+          containerStyle={{
+            width: "40%",
+            backgroundColor: "#F00",
+            ...prevButtonStyle,
+          }}
           title={prevButtonText}
           titleStyle={[{ color: "#FFF" }, prevButtonTextStyle]}
         />
@@ -139,10 +164,11 @@ const QuizSingleChoice = ({
             onNext();
           }}
           disabled={nextDisabled}
-          containerStyle={[
-            { width: "40%", backgroundColor: "#000" },
-            isLast ? endButtonStyle : nextButtonStyle,
-          ]}
+          containerStyle={{
+            width: "40%",
+            backgroundColor: "#000",
+            ...(isLast ? endButtonStyle : nextButtonStyle),
+          }}
           title={isLast ? endButtonText : nextButtonText}
           titleStyle={[
             { color: "#FFF" },
@@ -155,11 +181,22 @@ const QuizSingleChoice = ({
 };
 
 export default QuizSingleChoice;
+
 function getResposesKeys(item) {
   return Object.keys(item).filter(
     (key) => !["question", "answer", "response"].includes(key)
   );
 }
+
+type QuestionProps = {
+  item: any;
+  onAnswer: Function;
+  questionTitleStyle: TextStyle;
+  responseStyle: ViewStyle;
+  responseTextStyle: TextStyle;
+  selectedResponseStyle: ViewStyle;
+  selectedResponseTextStyle: TextStyle;
+};
 function Question({
   item,
   onAnswer,
@@ -168,7 +205,7 @@ function Question({
   responseTextStyle,
   selectedResponseStyle,
   selectedResponseTextStyle,
-}) {
+}: QuestionProps) {
   const responses = getResposesKeys(item);
   return (
     <View style={{ marginTop: 30, width: width - 50, alignItems: "center" }}>
@@ -192,7 +229,6 @@ function Question({
                 select ? selectedResponseTextStyle : responseTextStyle
               }
               responseStyle={select ? selectedResponseStyle : responseStyle}
-              key={i}
               onPress={() => {
                 onAnswer(item, text);
               }}
@@ -204,19 +240,26 @@ function Question({
   );
 }
 
+type QuestionItemProps = {
+  text: string;
+  onPress: Function;
+  disabled?: boolean;
+  responseStyle: ViewStyle;
+  responseTextStyle: TextStyle;
+};
 function QuestionItem({
   text,
   onPress,
   disabled,
   responseStyle,
   responseTextStyle,
-}) {
+}: QuestionItemProps) {
   return (
     <View style={{ marginVertical: 15 }}>
       <AppButton
         title={text}
         disabled={disabled}
-        containerStyle={[{ backgroundColor: "#000" }, responseStyle]}
+        containerStyle={{ backgroundColor: "#000", ...responseStyle }}
         width={"100%"}
         onPress={onPress}
         titleStyle={{ textTransform: "capitalize", ...responseTextStyle }}
