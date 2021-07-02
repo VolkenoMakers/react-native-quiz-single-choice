@@ -1,10 +1,10 @@
 {
   "name": "react-native-react-native-quiz-single-choice",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a react native single quiz module developped by volkeno",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@types/jest": "^26.0.23",
     "babel-preset-expo": "~8.1.0",
-    "metro-react-native-babel-preset": "^0.59.0"
+    "jest-expo": "^42.0.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-test-renderer": "^17.0.2"
   },
   "license": "ISC",
   "bugs": {

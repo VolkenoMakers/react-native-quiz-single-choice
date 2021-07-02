@@ -95,10 +95,13 @@ const QuizSingleChoice = ({
       useNativeDriver: true,
     }).start();
   }, [currentIndex]);
-  const translateX = animation.interpolate({
-    inputRange: questions.map((_, index) => index),
-    outputRange: questions.map((_, index) => -index * width),
-  });
+  const translateX =
+    questions.length > 1
+      ? animation.interpolate({
+          inputRange: questions.map((_, index) => index),
+          outputRange: questions.map((_, index) => -index * width),
+        })
+      : 0;
   const isLast = currentIndex === questions.length - 1;
   const isFirst = currentIndex === 0;
   let nextDisabled = responseRequired
@@ -151,6 +154,7 @@ const QuizSingleChoice = ({
             onPrev();
           }}
           disabled={isFirst}
+          testID="prev"
           containerStyle={{
             width: "40%",
             backgroundColor: "#F00",
@@ -163,6 +167,7 @@ const QuizSingleChoice = ({
           onPress={() => {
             onNext();
           }}
+          testID="next"
           disabled={nextDisabled}
           containerStyle={{
             width: "40%",
@@ -242,7 +247,7 @@ function Question({
 
 type QuestionItemProps = {
   text: string;
-  onPress: Function;
+  onPress: () => any;
   disabled?: boolean;
   responseStyle: ViewStyle;
   responseTextStyle: TextStyle;
@@ -259,6 +264,7 @@ function QuestionItem({
       <AppButton
         title={text}
         disabled={disabled}
+        testID={text}
         containerStyle={{ backgroundColor: "#000", ...responseStyle }}
         width={"100%"}
         onPress={onPress}
