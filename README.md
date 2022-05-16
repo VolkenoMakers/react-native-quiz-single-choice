@@ -1,21 +1,21 @@
-# react-native-quiz-single-choice
+# react-native-react-native-quiz-single-choice
 
 ![Single select](https://raw.githubusercontent.com/VolkenoMakers/react-native-quiz-single-choice/main/demo.gif)
 
 ## Add it to your project
 
 - Using NPM
-  `npm install react-native-quiz-single-choice`
+  `npm install react-native-react-native-quiz-single-choice`
 - or:
 - Using Yarn
-  `yarn add react-native-quiz-single-choice`
+  `yarn add react-native-react-native-quiz-single-choice`
 
 ## Usage
 
 ```javascript
 import React from "react";
 
-import QuizeSingleChoice from "react-native-quiz-single-choice";
+import QuizeSingleChoice from "react-native-react-native-quiz-single-choice";
 
 const QuizSingleChoiceApp = () => {
   const data = [

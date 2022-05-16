@@ -1,6 +1,5 @@
 import React from "react";
-import { ViewStyle } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, ViewStyle } from "react-native";
 import { Button, ButtonProps } from "react-native-elements";
 
 interface ButtonProps2 extends ButtonProps {

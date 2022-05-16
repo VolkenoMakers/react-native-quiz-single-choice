@@ -1,15 +1,26 @@
 import React from "react";
-import { TextStyle } from "react-native";
-import { View, Text, Dimensions, Animated, ViewStyle } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native";
 import { AppButton, OppButton } from "./Buttons";
 const { width } = Dimensions.get("window");
+type QuestionResponse = {
+  question: string;
+  answer: string;
+};
+type Question = { [key: string]: string } & QuestionResponse;
 type QuizSingleChoiceProps = {
   containerStyle: ViewStyle;
   questionTitleStyle: TextStyle;
   responseStyle: ViewStyle;
   responseTextStyle: TextStyle;
   selectedResponseStyle: ViewStyle;
-  selectedResponseTextStyle;
+  selectedResponseTextStyle: TextStyle;
   nextButtonText: string;
   nextButtonStyle: ViewStyle;
   nextButtonTextStyle: TextStyle;
@@ -22,7 +33,7 @@ type QuizSingleChoiceProps = {
   buttonsContainerStyle: ViewStyle;
   responseRequired: boolean;
   onEnd: (results: any) => any;
-  data: Array<any>;
+  data: Array<Question>;
 };
 const QuizSingleChoice = ({
   containerStyle,
@@ -54,7 +65,7 @@ const QuizSingleChoice = ({
   const animation = React.useRef(new Animated.Value(0)).current;
 
   const onAnswer = React.useCallback(
-    (_, response) => {
+    (_: any, response: string) => {
       const newQuestions = [...questions];
       const activeQuestion = { ...newQuestions[currentIndex] };
       activeQuestion.response = response;
@@ -75,7 +86,7 @@ const QuizSingleChoice = ({
     setCurrentIndex(currentIndex - 1);
   }, [currentIndex]);
   const handleEnd = React.useCallback(
-    (questions) => {
+    (questions: Question[]) => {
       let newData = [];
       for (let q of questions) {
         newData.push({
@@ -187,14 +198,14 @@ const QuizSingleChoice = ({
 
 export default QuizSingleChoice;
 
-function getResposesKeys(item) {
+function getResposesKeys(item: Question) {
   return Object.keys(item).filter(
     (key) => !["question", "answer", "response"].includes(key)
   );
 }
 
 type QuestionProps = {
-  item: any;
+  item: Question;
   onAnswer: Function;
   questionTitleStyle: TextStyle;
   responseStyle: ViewStyle;
